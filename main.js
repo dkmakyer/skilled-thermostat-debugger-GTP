@@ -23,11 +23,11 @@ const rooms = [
     },
 
     decreaseTemp() {
-      this.currTemp--;
+      this.currTemp > 10 ? this.currTemp-- : this.currTemp;
     },
 
     increaseTemp() {
-      this.currTemp++;
+      this.currTemp < 32 ? this.currTemp++ : this.currTemp;
     },
     toggleAircon() {
       this.airConditionerOn
@@ -58,11 +58,11 @@ const rooms = [
     },
 
     decreaseTemp() {
-      this.currTemp--;
+      this.currTemp > 10 ? this.currTemp-- : this.currTemp;
     },
 
     increaseTemp() {
-      this.currTemp++;
+      this.currTemp < 32 ? this.currTemp++ : this.currTemp;
     },
     toggleAircon() {
       this.airConditionerOn
@@ -93,11 +93,11 @@ const rooms = [
     },
 
     decreaseTemp() {
-      this.currTemp--;
+      this.currTemp > 10 ? this.currTemp-- : this.currTemp;
     },
 
     increaseTemp() {
-      this.currTemp++;
+      this.currTemp < 32 ? this.currTemp++ : this.currTemp;
     },
     toggleAircon() {
       this.airConditionerOn
@@ -128,11 +128,11 @@ const rooms = [
     },
 
     decreaseTemp() {
-      this.currTemp--;
+      this.currTemp > 10 ? this.currTemp-- : this.currTemp;
     },
 
     increaseTemp() {
-      this.currTemp++;
+      this.currTemp < 32 ? this.currTemp++ : this.currTemp;
     },
     toggleAircon() {
       this.airConditionerOn
@@ -142,26 +142,26 @@ const rooms = [
   },
 ];
 
-const warmOverlay= `linear-gradient(
+const coolOverlay= `linear-gradient(
     to bottom,
     rgba(141, 158, 247, 0.2),
     rgba(194, 197, 215, 0.1)
-  )`;
+  )`; //should be applied to the room image if temp is high after clicking on cool
 
-const coolOverlay = `linear-gradient(to bottom, rgba(236, 96, 98, 0.2), rgba(248, 210, 211, 0.13))`;
+const warmOverlay = `linear-gradient(to bottom, rgba(236, 96, 98, 0.2), rgba(248, 210, 211, 0.13))`;
 
 const setInitialOverlay = () => {
-  document.querySelector(
-    ".room"
-  ).style.backgroundImage = `url('${rooms[0].image}')`;
+  // document.querySelector(
+  //   ".room"
+  // ).style.backgroundImage = `url('${rooms[0].image}')`;//this is the original image
 
-  document.querySelector(".room").style.backgroundImage = `${
+  document.querySelector(".room").style.backgroundImage = `${//this is image with gradient on it
     rooms[0].currTemp < 25 ? coolOverlay : warmOverlay
   }, url('${rooms[0].image}')`;
 };
 
 const setOverlay = (room) => {
-  document.querySelector(".room").style.backgroundImage = `${
+  document.querySelector(".room").style.backgroundImage = `${//change linear gradient based on clicked overlay
     room.currTemp < 25 ? coolOverlay : warmOverlay
   }, url('${room.image}')`;
 };
@@ -179,7 +179,7 @@ const calculatePointPosition = (currTemp) => {
   const translateX = radius * Math.cos(radians);
   const translateY = radius * Math.sin(radians);
 
-  return { translateX, translateY };
+  return { translateX, translateY };//this helps us rotate the temperature
 };
 
 const setIndicatorPoint = (currTemp) => {
@@ -203,7 +203,7 @@ document.querySelector(".currentTemp").innerText = `${rooms[0].currTemp}°`;
 // Add new options from rooms array
 rooms.forEach((room) => {
   const option = document.createElement("option");
-  option.value = room;
+  option.value = room.name;
   option.textContent = room.name;
   roomSelect.appendChild(option);
 });
@@ -240,10 +240,10 @@ defaultSettings.addEventListener("click", function (e) {});
 // Increase and decrease temperature
 document.getElementById("increase").addEventListener("click", () => {
   const room = rooms.find((currRoom) => currRoom.name === selectedRoom);
-  const increaseRoomTemperature = room.increaseTemp;
+  const increaseRoomTemperature = room.increaseTemp();
 
   if (room.currTemp < 32) {
-    increaseRoomTemperature();
+    increaseRoomTemperature;
   }
 
   setIndicatorPoint(room.currTemp);
@@ -261,10 +261,10 @@ document.getElementById("increase").addEventListener("click", () => {
 
 document.getElementById("reduce").addEventListener("click", () => {
   const room = rooms.find((currRoom) => currRoom.name === selectedRoom);
-  const decreaseRoomTemperature = room.decreaseTemp;
+  const decreaseRoomTemperature = room.decreaseTemp();
 
   if (room.currTemp > 10) {
-    decreaseRoomTemperature();
+    decreaseRoomTemperature;
   }
 
   setIndicatorPoint(room.currTemp);
