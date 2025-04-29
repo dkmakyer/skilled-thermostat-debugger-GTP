@@ -19,4 +19,12 @@ MY CHANGES
 
 6. On lines 26, 61, 96 and 131, changed the incremented current temperature to be not go below 10
 
-6. On lines 30, 65, 100 and 135, changed the incremented current temperature to be not go below 10
+7. On lines 30, 65, 100 and 135, changed the incremented current temperature to be not go below 10
+
+8. On line 310 and line 315, changed the error message to be limited to the warm temperature range and the cool temperature range.
+
+9. On line 104 and line 110 in the index.html file, changed the max input to 24 from 22 for the coolInput iD, and 22 to 25 for the warm input ID to meet the edge case temperature requirements for the room
+
+10. added an event listener to the warm and cold buttons on like 283 to change the current temperature to the cold or warm preset temperatures
+
+*******. Refactor the setOverlay function. remove the setInitial overlay and call the setOverlay with the first room object.

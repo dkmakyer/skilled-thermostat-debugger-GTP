@@ -283,6 +283,39 @@ document.getElementById("reduce").addEventListener("click", () => {
 const coolBtn = document.getElementById("cool");
 const warmBtn = document.getElementById("warm");
 
+function usePresetTemp(presetTemp){
+  const room = rooms.find((currRoom) => currRoom.name === selectedRoom);
+  let newTemp = room.setCurrTemp(presetTemp);
+  setIndicatorPoint(newTemp);
+  currentTemp.textContent = `${room.currTemp}°`;
+
+  generateRooms();
+
+  setOverlay(room);
+}
+
+coolBtn.addEventListener("click", () => {
+  const room = rooms.find((currRoom) => currRoom.name === selectedRoom);
+  let newTemp = room.setCurrTemp(room.coldPreset);
+  setIndicatorPoint(newTemp);
+  currentTemp.textContent = `${room.currTemp}°`;
+
+  generateRooms();
+
+  setOverlay(room);
+});
+
+warmBtn.addEventListener("click", () => {
+  const room = rooms.find((currRoom) => currRoom.name === selectedRoom);
+  let newTemp = room.setCurrTemp(room.warmPreset);
+  setIndicatorPoint(newTemp);
+  currentTemp.textContent = `${room.currTemp}°`;
+
+  generateRooms();
+
+  setOverlay(room);
+});
+
 
 const inputsDiv = document.querySelector(".inputs");
 // Toggle preset inputs
@@ -307,12 +340,12 @@ document.getElementById("save").addEventListener("click", () => {
     // Validate the data
     if (coolInput.value < 10 || coolInput.value > 25) {
       errorSpan.style.display = "block";
-      errorSpan.innerText = "Enter valid temperatures (10° - 32°)";
+      errorSpan.innerText = "Enter valid cool temperatures (10° - 24°)";
     }
 
     if (warmInput.value < 25 || warmInput.value > 32) {
       errorSpan.style.display = "block";
-      errorSpan.innerText = "Enter valid temperatures (10° - 32°)";
+      errorSpan.innerText = "Enter valid warm temperatures (25° - 32°)";
     }
     // Validation passed
     // Set current room's presets

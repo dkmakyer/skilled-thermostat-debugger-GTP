@@ -182,7 +182,7 @@ svg.point {
 
 .inputs #save {
   border: none;
-  background-color: var(--cool-blue);
+  background-color: var(--cool-blue) !important;
   color: #ffffff;
   font-weight: 500;
   padding: 8px 10px;
