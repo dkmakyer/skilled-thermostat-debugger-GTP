@@ -283,16 +283,16 @@ document.getElementById("reduce").addEventListener("click", () => {
 const coolBtn = document.getElementById("cool");
 const warmBtn = document.getElementById("warm");
 
-function usePresetTemp(presetTemp){
-  const room = rooms.find((currRoom) => currRoom.name === selectedRoom);
-  let newTemp = room.setCurrTemp(presetTemp);
-  setIndicatorPoint(newTemp);
-  currentTemp.textContent = `${room.currTemp}°`;
+// function usePresetTemp(presetTemp){
+//   const room = rooms.find((currRoom) => currRoom.name === selectedRoom);
+//   let newTemp = room.setCurrTemp(presetTemp);
+//   setIndicatorPoint(newTemp);
+//   currentTemp.textContent = `${room.currTemp}°`;
 
-  generateRooms();
+//   generateRooms();
 
-  setOverlay(room);
-}
+//   setOverlay(room);
+// }
 
 coolBtn.addEventListener("click", () => {
   const room = rooms.find((currRoom) => currRoom.name === selectedRoom);
@@ -338,7 +338,7 @@ document.getElementById("save").addEventListener("click", () => {
 
   if (coolInput.value && warmInput.value) {
     // Validate the data
-    if (coolInput.value < 10 || coolInput.value > 25) {
+    if (coolInput.value < 10 || coolInput.value > 24) {
       errorSpan.style.display = "block";
       errorSpan.innerText = "Enter valid cool temperatures (10° - 24°)";
     }

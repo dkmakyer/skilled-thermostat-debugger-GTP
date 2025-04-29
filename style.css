@@ -16,8 +16,7 @@
 body,
 input,
 select,
-option,
-button {
+option{
   font-family: "Manrope", sans-serif;
   color: var(--text-primary);
   background-image: linear-gradient(to right, #ffffff, #f2f2f2), url();
@@ -182,7 +181,7 @@ svg.point {
 
 .inputs #save {
   border: none;
-  background-color: var(--cool-blue) !important;
+  background-color: var(--cool-blue);
   color: #ffffff;
   font-weight: 500;
   padding: 8px 10px;
