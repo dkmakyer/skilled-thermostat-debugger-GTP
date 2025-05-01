@@ -1,34 +1,37 @@
-MY CHANGES
-1. removed the setInitialOverlay function as it performs the same operation as the set overlay function on line 153. Initialized the setOverlay() with room[0] to render thr first room's details.
+# MY CHANGES
 
-2. Switched the variable names of the warm and cool overlay on line 145 and 151 to match the logical background color of ice and sun.
+1. **Removed** the `setInitialOverlay` function as it performs the same operation as the `setOverlay()` function on line 153. Initialized `setOverlay()` with `room[0]` to render the first room's details.
 
-3. On line 206, the original code extracts the entire room object instead of the name as an input value, changed it from "room" to "room.name".
+2. **Switched** the variable names of the warm and cool overlay on lines 145 and 151 to match the logical background color of ice and sun.
 
-4. on Line 243,  added the () to execute the increase temperature immediately and store it in the increase room variable. removed the () in line 246.
+3. On **line 206**, changed the input value from the entire room object (`room`) to `room.name` to correctly extract the name.
 
-5. Did same on line 264 and 267.
+4. On **line 243**, added `()` to execute `increaseTemperature` immediately and store it in the `increasedRoom` variable. Removed `()` in **line 246**.
 
-6. On lines 26, 61, 96 and 131, changed the incremented current temperature to be not go below 10
+5. Did the **same** on **lines 264 and 267**.
 
-7. On lines 30, 65, 100 and 135, changed the incremented current temperature to be not go below 10
+6. On **lines 26, 61, 96, and 131**, ensured that the incremented current temperature does not go below 10.
 
-8. On line 310 and line 315, changed the error message to be limited to the warm temperature range and the cool temperature range.
+7. On **lines 30, 65, 100, and 135**, ensured that the decremented current temperature does not go below 10.
 
-9. On line 104 and line 110 in the index.html file, changed the max input to 24 from 22 for the coolInput iD, and 22 to 25 for the warm input ID to meet the edge case temperature requirements for the room. Also changed the limit of the cool temperature from 25 to 24 on line 341 of the main.js file
+8. On **lines 310 and 315**, updated the error messages to reflect the warm and cool temperature range limits.
 
-10. added an event listener to the warm and cold buttons on line 283 to change the current temperature to the cold or warm preset temperatures
+9. In the `index.html` file:
+   - On **lines 104 and 110**, changed the `max` input to 24 (from 22) for the `coolInput` ID and to 25 (from 22) for the warm input ID.
+   - In `main.js`, changed the limit of the cool temperature from 25 to 24 on **line 341**.
 
-11. removed the button selector in the css file in line 19 so that the individual css code for those features are not overwritten
+10. **Added** an event listener to the warm and cold buttons on **line 283** to update the current temperature to the respective preset values.
 
-12. changed the comparison operator on line 384 to use a less than operator so it matches the current temperature
+11. **Removed** the global button selector in the CSS file on **line 19** to prevent it from overriding individual button styles.
 
-13. Added the code to the close preset event handler on line 320 and 321 to hide the error message when the close icon has been clicked.
+12. On **line 384**, changed the comparison operator to `<` (less than) to match the current temperature comparison logic.
 
-14. Made the cold and warm preset temperatures fallback to the the current temperature if they went below or above their required limit.
+13. On **lines 320 and 321**, added code to hide the error message when the close icon is clicked in the preset modal.
 
-15. refactored the temperature control event handlers for increasing and decreasing the current temperature to avoid repeating the same code in both event handlers on line 231.
+14. Ensured the **cold and warm preset temperatures** fall back to the current temperature if they exceed their respective limits.
 
-16. Used event delegation on the parent of the cool and warm preset buttons instead of selecting them individually using the getElementById method on line 227.
+15. **Refactored** the temperature control event handlers (increase/decrease) to remove repeated code on **line 231**.
 
-17. Added a setTimeout() to the preset input event handler to handle hiding the error message after 5 seconds
+16. **Used event delegation** on the parent of the cool and warm preset buttons instead of selecting them individually using `getElementById` on **line 227**.
+
+17. **Added** a `setTimeout()` in the preset input event handler to hide the error message after 5 seconds.
