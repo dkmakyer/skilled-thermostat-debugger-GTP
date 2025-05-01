@@ -542,3 +542,5 @@ function addNewRoom() {
 }
 
 document.getElementById('addRoom').addEventListener('click', addNewRoom);
+
+module.exports = rooms;
