@@ -39,10 +39,88 @@ body {
   width: 450px;
 }
 
+#overallContainer{
+  position: relative;
+}
+
 .main-container {
   display: flex;
   gap: 20px;
   align-items: start;
+}
+
+.modal-trigger{
+  width: 30px;
+  font-size: 2rem;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+}
+.modal-trigger:hover{
+  background-color: rgb(194, 214, 250);
+  cursor: pointer;
+}
+.modal-trigger p{
+  transform: translateX(0.4rem);
+}
+.room-modal-container{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.pop-up-container{
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgb(0, 0, 0, 0.3);
+}
+
+.pop-up{
+  background-color: rgb(255, 255, 255);
+  border-radius: 0.2rem;
+  height: 20rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  transform: translateY(12rem);
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.pop-up input{
+  width: 15rem;
+  height: 2rem;
+  border-radius: 0.2rem;
+  border: none;
+  padding-left: 0.5rem;
+  outline: none;
+  border: 0.1px solid var(--accent);
+}
+
+#addRoom{
+  background-color: var(--cool-blue);
+  color: #ffffff;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  border: none;
+  cursor: pointer;
+}
+
+#closeModal{
+  background-color: rgb(194, 214, 250);
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  border: none;
+  cursor: pointer;
+}
+
+#closeModal:hover{
+  background-color: rgb(194, 214, 250);
 }
 
 .main-content {

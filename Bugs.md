@@ -1,13 +1,5 @@
-
-1. the dropdown to display the various rooms are not dynamically displaying the data for every room that is clicked on
-2. you cant set the temperature from the buttons
-3. the temperature limit is not working as expected even if the limit is valid
-
-
 MY CHANGES
-1. removed "  document.querySelector(
-    ".room"
-  ).style.backgroundImage = `url('${rooms[0].image}')`;" on line 154 from the set overlay code since it does the same as the one below in updating the image with the overlay effect.
+1. removed the setInitialOverlay function as it performs the same operation as the set overlay function on line 153. Initialized the setOverlay() with room[0] to render thr first room's details.
 
 2. Switched the variable names of the warm and cool overlay on line 145 and 151 to match the logical background color of ice and sun.
 
@@ -29,4 +21,14 @@ MY CHANGES
 
 11. removed the button selector in the css file in line 19 so that the individual css code for those features are not overwritten
 
-*******. Refactor the setOverlay function. remove the setInitial overlay and call the setOverlay with the first room object.
+12. changed the comparison operator on line 384 to use a less than operator so it matches the current temperature
+
+13. Added the code to the close preset event handler on line 320 and 321 to hide the error message when the close icon has been clicked.
+
+14. Made the cold and warm preset temperatures fallback to the the current temperature if they went below or above their required limit.
+
+15. refactored the temperature control event handlers for increasing and decreasing the current temperature to avoid repeating the same code in both event handlers on line 231.
+
+16. Used event delegation on the parent of the cool and warm preset buttons instead of selecting them individually using the getElementById method on line 227.
+
+17. Added a setTimeout() to the preset input event handler to handle hiding the error message after 5 seconds
