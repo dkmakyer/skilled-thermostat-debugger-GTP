@@ -56,12 +56,14 @@ body {
   display: flex;
   align-items: center;
   border-radius: 5px;
+  border: none;
+  outline: none;
 }
 .modal-trigger:hover{
   background-color: rgb(194, 214, 250);
   cursor: pointer;
 }
-.modal-trigger p{
+.modal-trigger span{
   transform: translateX(0.4rem);
 }
 .room-modal-container{
@@ -83,6 +85,8 @@ body {
   background-color: rgb(255, 255, 255);
   border-radius: 0.2rem;
   height: 20rem;
+  width: 90%;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;

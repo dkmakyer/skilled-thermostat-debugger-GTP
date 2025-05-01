@@ -250,6 +250,9 @@ defaultSettings.addEventListener("click", function (e) {
   document.querySelector(".currentTemp").innerText = `${room.currTemp}°`;
 });
 
+const coolBtn = document.getElementById("cool");
+const warmBtn = document.getElementById("warm");
+
 // Increase and decrease temperature
 function changeTemperature(isIncrease) {
   const room = rooms.find((currRoom) => currRoom.name === selectedRoom);
@@ -434,3 +437,81 @@ document.querySelector(".rooms-control").addEventListener("click", (e) => {
     setSelectedRoom(e.target.parentNode.parentNode.id);
   }
 });
+
+document.getElementById("modalTrigger").addEventListener("click", (e) => {
+  const modal = document.getElementById("modalContainer");
+    modal.classList.remove("hidden");
+});
+
+document.getElementById("closeModal").addEventListener("click", () => {
+  const modal = document.getElementById("modalContainer");
+  modal.classList.add("hidden");
+})
+
+// extracting new room data from modal
+function addNewRoom() {
+  const roomName = document.getElementById('roomName').value.trim();
+  const temperature = parseInt(document.getElementById('currentTemperature').value);
+  const imageFile = document.getElementById('roomImage').files[0];
+
+  if (!roomName || isNaN(temperature) || temperature < 10 || temperature > 32) {
+    alert('Please enter valid room name and temperature');
+    return;
+  }
+
+  const imageUrl = imageFile ? URL.createObjectURL(imageFile) : './assets/default-home-image.jpg';
+
+  const validTemp = (temperature >= 10 && temperature <= 32) ? temperature : 25;//use room temperature if temperature they give is invalid
+  const newRoom = {
+    name: roomName,
+    currTemp: validTemp,
+    image: imageUrl,
+    coldPreset: 20,
+    warmPreset: 32,
+    airConditionerOn: false,
+    startTime: '16:30',
+    endTime: '20:00',
+
+    setCurrTemp(temp) {
+      this.currTemp = temp;
+    },
+    setColdPreset(newCold) {
+      this.coldPreset = newCold;
+    },
+    setWarmPreset(newWarm) {
+      this.warmPreset = newWarm;
+    },
+    decreaseTemp() {
+      this.currTemp > 10 ? this.currTemp-- : this.currTemp;
+    },
+    increaseTemp() {
+      this.currTemp < 32 ? this.currTemp++ : this.currTemp;
+    },
+    toggleAircon() {
+      this.airConditionerOn = !this.airConditionerOn;
+    }
+  };
+
+  rooms.push(newRoom);
+  
+  const roomSelect = document.getElementById("rooms");
+  const option = document.createElement("option");
+  option.value = newRoom.name;
+  option.textContent = newRoom.name;
+  roomSelect.appendChild(option);
+  
+  selectedRoom = newRoom.name;
+  roomSelect.value = newRoom.name;
+  
+  setSelectedRoom(newRoom.name);
+  generateRooms();
+
+  document.getElementById('roomName').value = '';
+  document.getElementById('currentTemperature').value = '';
+  document.getElementById('roomImage').value = '';
+  document.getElementById('modalContainer').classList.add('hidden');
+  
+  console.log('New room added:', newRoom);
+}
+
+document.getElementById('addRoom').addEventListener('click', addNewRoom);
