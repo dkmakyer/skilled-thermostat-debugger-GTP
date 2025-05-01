@@ -357,28 +357,55 @@ const generateRooms = () => {
   rooms.forEach((room) => {
     roomsHTML += `
     <div class="room-control" id="${room.name}">
-          <div class="top">
-            <h3 class="room-name">${room.name} - ${room.currTemp}°</h3>
-            <button class="switch">
-              <ion-icon name="power-outline" class="${
-                room.airConditionerOn ? "powerOn" : ""
-              }"></ion-icon>
-            </button>
-          </div>
+      <div class="top">
+        <h3 class="room-name">${room.name} - ${room.currTemp}°</h3>
+        <button class="switch">
+          <ion-icon name="power-outline" class="${
+            room.airConditionerOn ? "powerOn" : ""
+          }"></ion-icon>
+        </button>
+      </div>
 
-          ${displayTime(room)}
-         
-          <span class="room-status" style="display: ${
-            room.airConditionerOn ? "" : "none"
-          }">${room.currTemp < 25 ? "Cooling room to: " : "Warming room to: "}${
+      ${displayTime(room)}
+
+      <span class="room-status" style="display: ${
+        room.airConditionerOn ? "" : "none"
+      }">${room.currTemp < 25 ? "Cooling room to: " : "Warming room to: "}${
       room.currTemp
     }°</span>
-        </div>
-    `;
+    </div>`;
   });
 
+  if (rooms.length > 1) {
+    const activatedACs = rooms.every(room => room.airConditionerOn);
+    
+    roomsHTML += `
+    <div class="master-ac-container">
+      <button id="masterACButton">
+        <ion-icon name="power-outline" class="${activatedACs ? 'powerOn' : ''}"></ion-icon>
+        ${activatedACs ? 'Turn Off All ACs' : 'Turn On All ACs'}
+      </button>
+    </div>`;
+  }
+
   roomsControlContainer.innerHTML = roomsHTML;
+
+  const masterACButton = document.getElementById("masterACButton");
+  if (masterACButton) {
+    masterACButton.addEventListener("click", () => {
+      const activatedACs = rooms.every(room => room.airConditionerOn);
+      
+      rooms.forEach(room => {
+        if (room.airConditionerOn !== !activatedACs) {
+          room.toggleAircon();
+        }
+      });
+      
+      generateRooms(); 
+    });
+  }
 };
+
 const displayTime = (room) => {
   return `
       <div class="time-display">
@@ -450,20 +477,22 @@ document.getElementById("closeModal").addEventListener("click", () => {
 
 // extracting new room data from modal
 function addNewRoom() {
-  const roomName = document.getElementById('roomName').value.trim();
-  const temperature = parseInt(document.getElementById('currentTemperature').value);
-  const imageFile = document.getElementById('roomImage').files[0];
-
+  const roomName = document.getElementById('newRoomName').value.trim();
+  const temperature = parseInt(document.getElementById('newCurrentTemperature').value);
+  const imageFile = document.getElementById('newRoomImage').files[0];
+  
   if (!roomName || isNaN(temperature) || temperature < 10 || temperature > 32) {
     alert('Please enter valid room name and temperature');
     return;
   }
-
+  
   const imageUrl = imageFile ? URL.createObjectURL(imageFile) : './assets/default-home-image.jpg';
-
+  
+  const validRoomName = roomName.charAt(0).toUpperCase() + roomName.substring(1).toLowerCase();
   const validTemp = (temperature >= 10 && temperature <= 32) ? temperature : 25;//use room temperature if temperature they give is invalid
+
   const newRoom = {
-    name: roomName,
+    name: validRoomName,
     currTemp: validTemp,
     image: imageUrl,
     coldPreset: 20,
@@ -506,12 +535,10 @@ function addNewRoom() {
   setSelectedRoom(newRoom.name);
   generateRooms();
 
-  document.getElementById('roomName').value = '';
-  document.getElementById('currentTemperature').value = '';
-  document.getElementById('roomImage').value = '';
+  document.getElementById('newRoomName').value = '';
+  document.getElementById('newCurrentTemperature').value = '';
+  document.getElementById('newRoomImage').value = '';
   document.getElementById('modalContainer').classList.add('hidden');
-  
-  console.log('New room added:', newRoom);
 }
 
 document.getElementById('addRoom').addEventListener('click', addNewRoom);

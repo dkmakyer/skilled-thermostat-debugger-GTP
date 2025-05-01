@@ -451,6 +451,26 @@ svg.point {
   padding-left: 10px; /* Add spacing between times */
 }
 
+.master-ac-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#masterACButton {
+  padding: 10px 20px;
+  background-color: var(--bg-light);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#masterACButton:hover {
+  background-color: var(--accent);
+}
+
 @media only screen and (max-width: 470px) {
   .container {
     width: 360px;
