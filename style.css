@@ -472,14 +472,28 @@ svg.point {
 }
 
 @media only screen and (max-width: 470px) {
+  .main-container{
+    display: flex;
+    flex-direction: column;
+    min-width: 470px;
+  }
+  
   .container {
     width: 360px;
+    margin: 0 auto;
   }
 }
 
 @media only screen and (max-width: 380px) {
+  .main-container{
+    display: flex;
+    flex-direction: column;
+    min-width: 380px;
+  }
+
   .container {
     width: 320px;
+    margin: 0 auto;
   }
 }
 

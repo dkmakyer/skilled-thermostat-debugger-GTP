@@ -142,6 +142,23 @@ const rooms = [
   },
 ];
 
+setInterval(()=> {
+  const currentTime = new Date().toLocaleTimeString("en-GB", {
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+
+  rooms.forEach((room) => {
+    if(room.startTime === currentTime){
+      !room.airConditionerOn && room.toggleAircon();
+      generateRooms(); 
+    }else if(room.endTime === currentTime){
+      room.airConditionerOn && room.toggleAircon();
+      generateRooms(); 
+    }
+  } );
+}, 60000);
+
 const coolOverlay= `linear-gradient(
     to bottom,
     rgba(141, 158, 247, 0.2),
