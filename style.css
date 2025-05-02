@@ -248,8 +248,9 @@ svg.point {
   margin: 0 0 20px 0;
   /* border: solid 1px pink; */
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
 }
 
 .inputs input {
@@ -261,7 +262,7 @@ svg.point {
   outline: none;
 }
 
-.inputs #save {
+.inputs #savePreset, .inputs #saveTime {
   border: none;
   background-color: var(--cool-blue);
   color: #ffffff;
@@ -269,14 +270,25 @@ svg.point {
   padding: 8px 10px;
   border-radius: 4px;
   cursor: pointer;
+  height: 2rem;
 }
+
+.inputs #saveTime{
+  transform: translateY(0.9rem);
+}
+
 
 .inputs #close {
   border: none;
-  background: none;
+  background: var(--accent);
   font-size: 18px;
   cursor: pointer;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
 }
+
 
 .error {
   color: #ec6062;
@@ -482,6 +494,20 @@ svg.point {
     width: 360px;
     margin: 0 auto;
   }
+}
+
+.time-setting-container{
+  display: flex;
+justify-content: space-between;
+gap: 10px;
+}
+#startTimeInput, #endTimeInput{
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  outline: none;
+  padding: 5px 2px;
+  width: 4rem;
+  margin-top: 1rem;
 }
 
 @media only screen and (max-width: 380px) {

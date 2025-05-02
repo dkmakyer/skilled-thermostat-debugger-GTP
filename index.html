@@ -86,12 +86,27 @@
         </div>
         
         <div class="inputs hidden">
-          <input id="coolInput" type="number" min="10" max="24" placeholder="Cool" />
-          <input id="warmInput" type="number" min="25" max="32" placeholder="Warm" />
-          <button id="save">Save</button>
+          <div>
+            <input id="coolInput" type="number" min="10" max="24" placeholder="Cool" />
+            <input id="warmInput" type="number" min="25" max="32" placeholder="Warm" />
+            <button id="savePreset">Save</button>
+            
+            <span class="error"></span>
+          </div>
+          <div class="time-setting-container">
+            <label for="startTimeInput"> 
+              Start Time: 
+              <input type='text' placeholder="0:00" id="startTimeInput">
+            </label>
+            <label for="endTimeInput">
+              End Time: 
+              <input type='text' placeholder="23:59" id="endTimeInput">
+            </label>
+            
+            <button id="saveTime"><span>Save</span></button>
+          </div>
+
           <button id="close"><ion-icon name="close"></ion-icon></button>
-          
-          <span class="error"></span>
         </div>
       </div>
       
